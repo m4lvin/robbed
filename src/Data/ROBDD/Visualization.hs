@@ -1,4 +1,4 @@
-module Data.ROBDD.Visualization ( viewBDD ) where
+module Data.ROBDD.Visualization ( viewBDD, dotBDD ) where
 
 import Data.GraphViz
 import Data.ROBDD.Types
@@ -12,7 +12,14 @@ viewBDD bdd = do
                                   , fmtEdge = \(_,_,l) -> [toLabel l]
                                   }
       dg = graphToDot params dag
-  let s = show dg
-  putStrLn s
-  _ <- runGraphvizCanvas' dg Gtk
+  _ <- runGraphvizCanvas' dg Xlib
   return ()
+
+dotBDD :: ROBDD -> String -> IO String
+dotBDD bdd filename = do
+  let dag = makeDAG bdd
+      params = nonClusteredParams { fmtNode = \(_,l) -> [toLabel l]
+                                  , fmtEdge = \(_,_,l) -> [toLabel l]
+                                  }
+      dg = graphToDot params dag
+  runGraphviz dg Pdf filename
