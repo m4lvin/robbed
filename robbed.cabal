@@ -24,7 +24,7 @@ library
   build-depends: unordered-containers > 0.1.2,
                  hashable, containers,
                  base == 4.*, mtl == 2.*,
-                 fgl, graphviz >= 2999.17 && < 2999.18
+                 fgl, graphviz >= 2999.17 && < 2999.19
   other-modules: Data.ROBDD.BooleanFunctions
   ghc-options: -Wall -funbox-strict-fields
 
